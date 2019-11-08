@@ -1,0 +1,57 @@
+@charset "UTF-8";
+html, body{
+	margin: 0;
+	height: 100%;
+	overflow: hidden;
+}
+.wrapper{
+	display: grid;
+	width: 100%
+	height: 100%;
+	grid-template-columns: 20% 60% 20%;
+	grid-template-rows: 20% 60% 20%;
+} 
+.wrapper div{
+	border: 2px solid red;
+} 
+.container{
+	display: grid;
+	width: 100%
+	height: 100%;
+	grid-template-columns: 20% 60% 20%;
+	grid-template-rows: 20% 60% 20%;
+	border : 1px solid blue;
+}
+.container div{
+	border : 1px solid blue;
+}
+.active{background-color: lightblue;}
+#login_tab{
+	display: grid;
+	width: 100%;
+	height: 80%;
+	grid-template-columns: 50% 50%;
+	grid-template-rows: 50% 50%;
+	margin: 0 auto;
+	padding-top: 50px;
+}
+#join_form{width: 100%; height: 100%}
+#login_form{
+	display: grid;
+	width: 100%; 
+	height: 100%;
+	grid-template-rows: 50% 50%;
+}
+#login_form div{1px solid black}
+#login_tab div{border : 1px solid black;}
+.input_box{
+	display: grid;
+	grid-template-rows: 50% 50% 50%;
+	grid-template-columns: 50% 50%;
+	width: %; height: 100%; margin-top: 70px;
+}
+#input_item{margin: 20% ;}
+#wego{width: 100%;height: 100%;}
+#login_btn{width: 20%; height: 20%}
+#join_btn{width: 20%; height: 20%}
+.input_text{width: 50%; height: 50px; margin-top: 70px}

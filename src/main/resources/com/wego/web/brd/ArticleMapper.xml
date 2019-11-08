@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wego.web.brd.ArticleMapper">
+  
+   <insert id="insertArticle" parameterType="Article">
+       INSERT INTO ARTICLE(UID, BOARD_TYPE, TITLE, CONTENT) VALUES (
+            #{uid}, #{boardType},#{title}, #{content}
+       )
+   </insert>
+   <select id="countArticle" resultType="string">
+   		SELECT COUNT(*) FROM ARTICLE
+   </select>
+   <select id="selectAll" resultType="Article" parameterType="Proxy">
+		SELECT A.BOARD_TYPE AS boardType, A.* FROM (
+			SELECT * 
+			FROM ARTICLE
+			ORDER BY ARTSEQ DESC) A
+		LIMIT ${startRow}, ${pageSize}
+   </select>
+   
+</mapper>

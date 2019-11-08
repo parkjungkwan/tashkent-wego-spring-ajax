@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+  	<settings>
+      	<setting name="mapUnderscoreToCamelCase" value="true"/>
+  	</settings>
+  	<typeAliases>
+      	<typeAlias alias="User" type="com.wego.web.usr.User"/>
+      	<typeAlias alias="Article" type="com.wego.web.brd.Article"/>
+      	<typeAlias alias="Admin" type="com.wego.web.adm.Admin"/>
+      	<typeAlias alias="Proxy" type="com.wego.web.pxy.Proxy"/>
+	</typeAliases>
+</configuration>
