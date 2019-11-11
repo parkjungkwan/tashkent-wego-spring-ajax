@@ -38,7 +38,7 @@ public class RootContext {
 		  DriverManagerDataSource dataSource = new DriverManagerDataSource();
 
 		  	dataSource.setDriverClassName("org.mariadb.jdbc.Driver");
-		    dataSource.setUrl("jdbc:mariadb://172.168.0.246/mysql");
+		    dataSource.setUrl("jdbc:mariadb://localhost/mysql");
 		    dataSource.setUsername("wego");
 		    dataSource.setPassword("wego");
 

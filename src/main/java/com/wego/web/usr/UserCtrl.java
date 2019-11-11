@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.wego.web.cmm.IConsumer;
 import com.wego.web.cmm.IFunction;
 import com.wego.web.cmm.IPredicate;
+import com.wego.web.enums.SQL;
 import com.wego.web.utl.Printer;
 
 import lombok.extern.log4j.Log4j;
@@ -79,6 +80,40 @@ public class UserCtrl {
 		map.clear();
 		map.put("msg", "SUCCESS");
 		return map;
+	}
+	@GetMapping("/drop/table")
+	public Map<?,?> dropUser(){
+		HashMap<String, String> paramMap = new HashMap<>();
+		paramMap.put("DROP_USER", SQL.DROP_USER.toString());
+		printer.accept("테이블 삭제 쿼리 : \n"+paramMap.get("DROP_USER"));
+		IConsumer<HashMap<String, String>> c = o->userMapper.dropUser(o);
+		c.accept(paramMap);
+		paramMap.clear();
+		paramMap.put("msg", "SUCCESS");
+		return paramMap;
+	}
+	
+	@GetMapping("/create/table")
+	public Map<?,?> createUser(){
+		HashMap<String, String> paramMap = new HashMap<>();
+		paramMap.put("CREATE_USER", SQL.CREATE_USER.toString());
+		printer.accept("테이블 생성 쿼리 : \n"+paramMap.get("CREATE_USER"));
+		IConsumer<HashMap<String, String>> c = o->userMapper.createUser(o);
+		c.accept(paramMap);
+		paramMap.clear();
+		paramMap.put("msg", "SUCCESS");
+		return paramMap;
+	}
+	@GetMapping("/create/db")
+	public Map<?,?> createWegodb(){
+		HashMap<String, String> paramMap = new HashMap<>();
+		paramMap.put("CREATE_DB", SQL.CREATE_DB.toString());
+		printer.accept("create/db 쿼리 : \n"+paramMap.get("CREATE_DB"));
+		IConsumer<HashMap<String, String>> c = o->userMapper.createUser(o);
+		c.accept(paramMap);
+		paramMap.clear();
+		paramMap.put("msg", "SUCCESS");
+		return paramMap;
 	}
 
 }

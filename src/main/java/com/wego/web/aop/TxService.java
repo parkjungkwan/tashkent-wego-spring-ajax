@@ -8,11 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.wego.web.pxy.Proxy;
+import com.wego.web.usr.User;
+import com.wego.web.usr.UserMapper;
 
-@Transactional
+
 @Service
 public class TxService {
-	@Autowired TxMapper mapper;
+	@Autowired TxMapper txMapper;
+	@Autowired UserMapper userMapper;
 	@Autowired Proxy pxy;
 	//@Autowired List<String> txServicelist;
 	
@@ -22,6 +25,14 @@ public class TxService {
 		txServicelist.clear();
 		txServicelist = (List<String>) pxy.crawl(paramMap);
 		return txServicelist;
+	}
+	@Transactional
+	public int registerUsers(){
+		List<User> list = new ArrayList<>();
+		for(User u : list) {
+			txMapper.insertUser(u);
+		}
+		return userMapper.countUsers();
 	}
 	
 }

@@ -103,7 +103,39 @@ adm = (()=>{
 		})
 	}
 	let cust_mgmt=()=>{
-		alert('고객 등록 준비')
+		$('#right').empty()
+		$('<a>데이터베이스 생성</a><br/>')
+		.appendTo('#right')
+		.click(e=>{
+			e.preventDefault()
+			$.getJSON(_+'/cmm/create/db',d=>{
+				alert('데이터베이스 생성 성공여부 :'+d.msg)
+			})
+		})
+		$('<a>고객 테이블 생성</a><br/>')
+		.appendTo('#right')
+		.click(e=>{
+			e.preventDefault()
+			$.getJSON(_+'/users/create/table',d=>{
+				alert('테이블 생성 성공여부 :'+d.msg)
+			})
+		})
+		$('<a>고객 테이블 삭제</a><br/>')
+		.appendTo('#right')
+		.click(e=>{
+			e.preventDefault()
+			$.getJSON(_+'/users/drop/table',d=>{
+				alert('테이블 삭제 성공여부 :'+d.msg)
+			})
+		})
+		$('<a>고객 대량정보 입력</a><br/>')
+		.appendTo('#right')
+		.click(e=>{
+			e.preventDefault()
+			$.getJSON(_+'/tx/register/users',d=>{
+				alert('고객 수 :'+d.userCount)
+			})
+		})
 	}
 	return{onCreate}
 })()
