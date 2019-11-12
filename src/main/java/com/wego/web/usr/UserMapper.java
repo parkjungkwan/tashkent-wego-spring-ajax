@@ -13,4 +13,5 @@ public interface UserMapper {
 	public void createDB(HashMap<String, String> paramMap);
 	public void createUser(HashMap<String, String> paramMap);
 	public void dropUser(HashMap<String, String> paramMap);
+	public void truncateUser(HashMap<String, String> paramMap);
 }

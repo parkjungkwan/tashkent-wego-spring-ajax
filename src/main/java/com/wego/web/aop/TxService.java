@@ -37,5 +37,9 @@ public class TxService {
 		manager.insertUsers();
 		return userMapper.countUsers();
 	}
+	public int trucateUsers() {
+		manager.truncateUsers();
+		return userMapper.countUsers();
+	}
 	
 }

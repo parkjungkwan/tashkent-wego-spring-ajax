@@ -2,29 +2,35 @@ package com.wego.web.pxy;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.function.BiFunction;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.wego.web.aop.TxMapper;
+import com.wego.web.enums.SQL;
 import com.wego.web.usr.User;
 import com.wego.web.usr.UserMapper;
 @Component("manager")
 public class UserProxy extends Proxy{
 	@Autowired UserMapper userMapper;
+	@Autowired TxMapper txMapper;
 	 public String makeBirthday() {
 		 String birthday = "";
-	        int[] maxDays = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
-	        
-	        int iMinMonth = 1;
-	        int iMaxMonth = 12;
-	        
-	        int iRandomMonth = (int)(Math.random() * iMaxMonth - iMinMonth + 1) + iMinMonth;
-	        int iRandomDay = (int)(Math.random() * (maxDays[iRandomMonth-1] -2) + 1);
-	        
-	       return birthday;
+	       int a = 1970,b = 2000;
+	      BiFunction<Integer,Integer,Integer> f = (t,u)->(int)(Math.random()*(u-t))+t;
+	      int year = f.apply(a, b);
+	          int[] maxDays = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+	          int iMinMonth = 1;
+	          int iMaxMonth = 12;
+	          int iRandomMonth = (int)(Math.random() * iMaxMonth - iMinMonth + 1) + iMinMonth;
+	          int iRandomDay = (int)(Math.random() * (maxDays[iRandomMonth-1] -2) + 1);
+	          birthday= String.valueOf(year)+"년"+String.valueOf(iRandomMonth)+"월"+String.valueOf(iRandomDay)+"일";
+	         return birthday;
 	    }
 	 public String makeGender() {
 		 List<String> genderText = Arrays.asList("M","F");
@@ -86,7 +92,13 @@ public class UserProxy extends Proxy{
 	@Transactional
 	public void insertUsers() {
 		for(int i=0;i< 500;i++) {
-			userMapper.insertUser(makeUser());
+			txMapper.insertUser(makeUser());
 		}
+	}
+	public void truncateUsers() {
+		HashMap<String, String> map = new HashMap<>();
+		map.put("TRUNCATE_USER", SQL.TRUNCATE_USER.toString());
+		userMapper.truncateUser(map);
+		
 	}
 }

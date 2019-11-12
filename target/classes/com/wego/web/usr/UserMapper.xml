@@ -7,13 +7,15 @@
 	<select id="createDB" parameterType="hashmap">
 		${CREATE_DB}
 	</select>
-	<select id="createUser" parameterType="map">
+	<select id="createUser" parameterType="hashmap">
 		${CREATE_USER}
 	</select>
-	<select id="dropUser" parameterType="map">
+	<select id="dropUser" parameterType="hashmap">
 		${DROP_USER}
 	</select>
-  
+  <select id="truncateUser" parameterType="hashmap">
+		${TRUNCATE_USER}
+	</select>
    <select id="existId" resultType="int" >
     SELECT COUNT(*)
     FROM USER

@@ -136,6 +136,14 @@ adm = (()=>{
 				alert('고객 수 :'+d.userCount)
 			})
 		})
+		$('<a>전체 고객 정보 삭제</a><br/>')
+		.appendTo('#right')
+		.click(e=>{
+			e.preventDefault()
+			$.getJSON(_+'/tx/truncate/users',d=>{
+				alert('고객 수 :'+d.userCount)
+			})
+		})
 	}
 	return{onCreate}
 })()
