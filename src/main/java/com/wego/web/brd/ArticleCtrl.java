@@ -82,5 +82,10 @@ public class ArticleCtrl {
 	public Map<?,?> delete(@PathVariable String artseq, @RequestBody Article param){
 		return null;
 	}
+	
+	@GetMapping("/fileupload")
+	public void fileUpload() {
+		
+	}
 
 }

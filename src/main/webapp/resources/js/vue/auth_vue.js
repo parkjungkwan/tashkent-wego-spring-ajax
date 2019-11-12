@@ -276,7 +276,7 @@ auth_vue = {
 		'    <img class="mb-4" src="'+x.img+'/bootstrap-solid.svg" alt="" width="72" height="72">'+
 		'    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>'+
 		'    <label for="inputEmail" class="sr-only">Email address</label>'+
-		'    <input type="text" id="uid" value="aaa" class="form-control" placeholder="Email address" required="" autofocus="">'+
+		'    <input type="text" id="uid" value="01ph63" class="form-control" placeholder="Email address" required="" autofocus="">'+
 		'    <label for="inputPassword" class="sr-only">Password</label>'+
 		'    <input type="password" id="pwd" value="1" class="form-control" placeholder="Password" required="">'+
 		'    <div class="checkbox mb-3">'+
