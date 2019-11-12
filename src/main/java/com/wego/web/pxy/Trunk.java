@@ -1,10 +1,11 @@
 package com.wego.web.pxy;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.function.Function;
 
+import org.springframework.stereotype.Component;
+@Component
 public class Trunk<T> {
 	private HashMap<String, T> map;
 	public void put(List<String> x, List<T> y) {

@@ -35,7 +35,7 @@ import com.wego.web.utl.Printer;
 @RestController
 @RequestMapping("/admins")
 public class AdminCtrl {
-	private static final Logger logger = LoggerFactory.getLogger(UserCtrl.class);
+	private static final Logger logger = LoggerFactory.getLogger(AdminCtrl.class);
 	//@Resource HashMap<String, String>stringMap;
 	//@Resource HashMap<String, Admin>adminMap;
 	@Autowired Admin admin;

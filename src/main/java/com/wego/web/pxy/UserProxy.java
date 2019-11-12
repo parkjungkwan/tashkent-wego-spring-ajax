@@ -3,13 +3,17 @@ package com.wego.web.pxy;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.function.BiFunction;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.wego.web.usr.User;
+import com.wego.web.usr.UserMapper;
 @Component("manager")
 public class UserProxy extends Proxy{
+	@Autowired UserMapper userMapper;
 	 public String makeBirthday() {
 		 String birthday = "";
 	        int[] maxDays = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
@@ -23,16 +27,33 @@ public class UserProxy extends Proxy{
 	       return birthday;
 	    }
 	 public String makeGender() {
-		 return "";
+		 List<String> genderText = Arrays.asList("M","F");
+         Collections.shuffle(genderText);
+         String gender = genderText.get(0);
+         return gender;
 	 }
 	 public String makeUserid() {
-		 return "";
+	       List<String> uidText = Arrays.asList("a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "n", "m", "o",
+                   "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "1", "2", "3", "4", "5", "6", "7", "8", "9",
+                   "0");
+        Collections.shuffle(uidText);
+        String uids = uidText.get(0)+uidText.get(1)+uidText.get(2)+uidText.get(3)+uidText.get(4)+uidText.get(5);
+//        uid.add(uids);
+        return uids;
 	 }
 	 public String makePetType() {
-		 return "";
+		  List<String> pattypes = Arrays.asList("고양이", "강아지", "새", "고슴도치", "뱀", "페릿", "햄스터");
+          Collections.shuffle(pattypes);
+          String pattype = pattypes.get(0);
+       return pattype;
 	 }
 	 public String makeTelephone() {
-		 return "";
+		 int a = 1111,b = 9999;
+	        BiFunction<Integer,Integer,Integer> f = (t,u)->(int)(Math.random()*(u-t))+t;
+	        int pre = f.apply(a,b);
+	        int af= f.apply(a,b);
+	        String tel = "010-"+String.valueOf(pre)+"-"+String.valueOf(af);
+	            return tel;
 	 }
 	 public String makeUsername() {
 		 List<String> fname = Arrays.asList("김", "이", "박", "최", "정", "강", "조", "윤", "장", "임", "한", "오", "서", "신", "권", "황", "안",
@@ -58,7 +79,6 @@ public class UserProxy extends Proxy{
 
 
 	public User makeUser(){
-		 // uid,pwd,uname,birth,gender,tel,pettype;
 		return new User(makeUserid(),"1",makeUsername(),makeBirthday(),makeGender(),makeTelephone(),makePetType());
 
 
@@ -66,7 +86,7 @@ public class UserProxy extends Proxy{
 	@Transactional
 	public void insertUsers() {
 		for(int i=0;i< 500;i++) {
-			
+			userMapper.insertUser(makeUser());
 		}
 	}
 }

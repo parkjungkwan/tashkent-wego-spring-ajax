@@ -3,8 +3,6 @@ package com.wego.web.adm;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.wego.web.pxy.Trunk;
-
 
 
 public interface AdminMapper {
@@ -15,7 +13,7 @@ public interface AdminMapper {
 
 	Admin updateAdmin(Admin param);
 
-	Admin selectAdmin(Trunk<? extends Admin> map);
+	Admin selectAdmin(HashMap<String, Object> map);
 
 
 }

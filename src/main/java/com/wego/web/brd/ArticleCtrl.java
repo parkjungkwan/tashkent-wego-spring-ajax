@@ -31,9 +31,8 @@ public class ArticleCtrl {
 	@Autowired Article article;
 	@Autowired Printer printer;
 	@Autowired ArticleMapper articleMapper;
-	@Autowired List<Article>list;
+	@Autowired Box<Article>box;
 	@Qualifier PageProxy pager;
-	@Qualifier Box<String> box;
 	@Qualifier Trunk<Object> trunk;
 	
 	@PostMapping("/")
@@ -53,7 +52,7 @@ public class ArticleCtrl {
 		pager.setPageNum(pager.integer(pageNo));
 		pager.setPageSize(pager.integer(pageSize));
 		pager.paging();
-		list.clear();
+		box.clear();
 		ISupplier<List<Article>> s =()-> articleMapper.selectAll(pager);
 		printer.accept("해당 페이지 글목록 \n"+s.get());
 		int ran = pager.random(3, 11);

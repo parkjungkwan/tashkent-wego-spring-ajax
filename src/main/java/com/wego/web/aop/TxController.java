@@ -23,7 +23,7 @@ import com.wego.web.utl.Printer;
 public class TxController {
 	@Autowired Printer printer;
 	@Autowired TxService txService;
-	@Qualifier Trunk<Object> trunk;
+	@Autowired Trunk<Object> trunk;
 	
 	@GetMapping("/crawling/{site}/{srch}")
 	public void bringUrl(@PathVariable String site,

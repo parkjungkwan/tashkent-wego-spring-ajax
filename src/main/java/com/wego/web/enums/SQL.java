@@ -10,7 +10,13 @@ public enum SQL {
 			result = "CREATE DATABASE WEGODB";
 			break;
 		case CREATE_USER:
-			result = "CREATE TABLE USER()";
+			result = "CREATE TABLE USER(UID VARCHAR(20)PRIMARY KEY,"
+                    + " PWD VARCHAR(10) ," +
+                    "  UNAME VARCHAR(20) ," +
+                    "  BIRTH VARCHAR(10) ," +
+                    "  GENDER VARCHAR(10) ," +
+                    "  TEL INT," +
+                    "  PETTYPE VARCHAR(20))";
 			break;
 		case CREATE_ITEM:
 			result = "CREATE TABLE ITEM()";
