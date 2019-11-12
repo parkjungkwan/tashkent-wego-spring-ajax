@@ -7,6 +7,9 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.wego.web.pxy.CrawlingProxy;
+import com.wego.web.pxy.PageProxy;
 import com.wego.web.pxy.Proxy;
 import com.wego.web.usr.User;
 import com.wego.web.usr.UserMapper;
@@ -16,14 +19,14 @@ import com.wego.web.usr.UserMapper;
 public class TxService {
 	@Autowired TxMapper txMapper;
 	@Autowired UserMapper userMapper;
-	@Autowired Proxy pxy;
+	@Autowired CrawlingProxy cralwer;
 	//@Autowired List<String> txServicelist;
 	
 	@SuppressWarnings("unchecked")
 	public List<?> crawling(Map<?,?> paramMap){
 		List<String> txServicelist = new ArrayList<>();
 		txServicelist.clear();
-		txServicelist = (List<String>) pxy.crawl(paramMap);
+		txServicelist = (List<String>) cralwer.crawl(paramMap);
 		return txServicelist;
 	}
 	@Transactional

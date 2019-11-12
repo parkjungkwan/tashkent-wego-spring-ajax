@@ -1,7 +1,7 @@
 package com.wego.web.enums;
 
 public enum SQL {
-	CREATE_DB, CREATE_USER, DROP_USER;
+	CREATE_DB, CREATE_USER, DROP_USER, CREATE_ITEM;
 	@Override
 	public String toString() {
 		String result = "";
@@ -11,6 +11,9 @@ public enum SQL {
 			break;
 		case CREATE_USER:
 			result = "CREATE TABLE USER()";
+			break;
+		case CREATE_ITEM:
+			result = "CREATE TABLE ITEM()";
 			break;
 		
 		case DROP_USER:

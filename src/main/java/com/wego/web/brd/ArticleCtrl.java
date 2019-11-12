@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.wego.web.cmm.IConsumer;
 import com.wego.web.cmm.ISupplier;
-import com.wego.web.pxy.Proxy;
+import com.wego.web.pxy.PageProxy;
 import com.wego.web.pxy.ProxyMap;
 import com.wego.web.utl.Printer;
 
@@ -30,7 +30,7 @@ public class ArticleCtrl {
 	@Autowired Printer printer;
 	@Autowired ArticleMapper articleMapper;
 	@Autowired List<Article>list;
-	@Autowired Proxy pxy;
+	@Autowired PageProxy pxy;
 	@Autowired ProxyMap map;
 	
 	@PostMapping("/")
