@@ -8,9 +8,10 @@ import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.wego.web.utl.Printer;
-
+@Component("crawler")
 public class CrawlingProxy extends Proxy{
 	@Autowired Printer printer;
 	public List<?> crawl(Map<?, ?> paramMap) {

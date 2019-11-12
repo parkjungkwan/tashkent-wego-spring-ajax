@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,14 +20,14 @@ import com.wego.web.usr.UserMapper;
 public class TxService {
 	@Autowired TxMapper txMapper;
 	@Autowired UserMapper userMapper;
-	@Autowired CrawlingProxy cralwer;
+	@Qualifier CrawlingProxy crawler;
 	//@Autowired List<String> txServicelist;
 	
 	@SuppressWarnings("unchecked")
 	public List<?> crawling(Map<?,?> paramMap){
 		List<String> txServicelist = new ArrayList<>();
 		txServicelist.clear();
-		txServicelist = (List<String>) cralwer.crawl(paramMap);
+		txServicelist = (List<String>) crawler.crawl(paramMap);
 		return txServicelist;
 	}
 	@Transactional

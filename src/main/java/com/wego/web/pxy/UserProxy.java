@@ -4,10 +4,11 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.wego.web.usr.User;
-
+@Component("manager")
 public class UserProxy extends Proxy{
 	 public String makeBirthday() {
 		 String birthday = "";

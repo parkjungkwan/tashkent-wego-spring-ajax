@@ -24,6 +24,7 @@ import com.wego.web.utl.Printer;
 import lombok.Data;
 
 @Data @Lazy
+@Component("pager")
 public class PageProxy extends Proxy{
 	private int totalCount, startRow, endRow, 
 				pageCount,pageNum, pageSize, startPage, endPage,
@@ -33,10 +34,8 @@ public class PageProxy extends Proxy{
 	private final int BLOCK_SIZE = 5;
 	@Autowired Printer p;
 	@Autowired ArticleMapper articleMapper;
-	@Autowired ProxyMap map;
 
 	
-	@SuppressWarnings("unused")
 	public void paging() {
 		ISupplier<String> s = ()-> articleMapper.countArticle();
 		totalCount = Integer.parseInt(s.get());
