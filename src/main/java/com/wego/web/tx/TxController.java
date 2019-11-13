@@ -1,4 +1,4 @@
-package com.wego.web.aop;
+package com.wego.web.tx;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.wego.web.pxy.Box;
+import com.wego.web.pxy.CrawlingProxy;
 import com.wego.web.pxy.Trunk;
 import com.wego.web.utl.Printer;
 
@@ -23,7 +24,8 @@ import com.wego.web.utl.Printer;
 public class TxController {
 	@Autowired Printer printer;
 	@Autowired TxService txService;
-	@Autowired Trunk<Object> trunk;
+	@Autowired Trunk<String> trunk;
+	@Autowired CrawlingProxy crawler;
 	
 	@GetMapping("/crawling/{site}/{srch}")
 	public void bringUrl(@PathVariable String site,
@@ -38,7 +40,7 @@ public class TxController {
 		
 		int userCount = txService.registerUsers();
 		printer.accept("서비스 카운팅: "+ userCount);
-		trunk.put(Arrays.asList("userCount"), Arrays.asList(userCount));
+		trunk.put(Arrays.asList("userCount"), Arrays.asList(crawler.string(userCount)));
 		return trunk.get();
 	}
 	@GetMapping("/truncate/users")
@@ -46,7 +48,7 @@ public class TxController {
 		
 		int userCount = txService.trucateUsers();
 		printer.accept("서비스 카운팅: "+ userCount);
-		trunk.put(Arrays.asList("userCount"), Arrays.asList(userCount));
+		trunk.put(Arrays.asList("userCount"), Arrays.asList(crawler.string(userCount)));
 		return trunk.get();
 	}
 }

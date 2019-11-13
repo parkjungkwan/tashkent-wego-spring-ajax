@@ -80,12 +80,16 @@ adm = (()=>{
 				'<form id="crawl_form" class="form-inline my-2 my-lg-0">'+
 				'  <select name="site" size="1">'+
 				'  </select>'+
-		          '<input class="form-control mr-sm-2" type="text" placeholder="insert URL for crawling" aria-label="Search">'+
+		          '<input class="form-control mr-sm-2" type="text" value="스톤애견풀빌라" placeholder="insert URL for crawling" aria-label="Search">'+
 				'</form>')
 		.appendTo('#right')
 		$('#crawl_form input[class="form-control mr-sm-2"]')
 		.css({width:'80%'})
-		$.each([{sub:'naver.com'},{sub:'daum.net'},{sub:'google.co.kr'},{sub:'youtube.com'}],(i,j)=>{
+		$.each([{sub:'직접입력'},
+			{sub:'daum.net'},
+			{sub:'google.co.kr'},
+			{sub:'youtube.com'},
+			{sub:'naver.com'}],(i,j)=>{
 			$('<option value='+j.sub+'>'+j.sub+'</option>')
 			.appendTo('#crawl_form select')
 		})

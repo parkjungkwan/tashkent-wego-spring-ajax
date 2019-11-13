@@ -11,8 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.wego.web.aop.TxMapper;
 import com.wego.web.enums.SQL;
+import com.wego.web.tx.TxMapper;
 import com.wego.web.usr.User;
 import com.wego.web.usr.UserMapper;
 @Component("manager")

@@ -16,7 +16,7 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.wego.web.brd.ArticleMapper;
+import com.wego.web.brd.CommunityMapper;
 import com.wego.web.cmm.ISupplier;
 import com.wego.web.usr.User;
 import com.wego.web.utl.Printer;
@@ -33,7 +33,7 @@ public class PageProxy extends Proxy{
 	private String search;
 	private final int BLOCK_SIZE = 5;
 	@Autowired Printer p;
-	@Autowired ArticleMapper articleMapper;
+	@Autowired CommunityMapper articleMapper;
 
 	
 	public void paging() {

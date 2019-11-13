@@ -1,4 +1,4 @@
-package com.wego.web.aop;
+package com.wego.web.tx;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.wego.web.pxy.Box;
 import com.wego.web.pxy.CrawlingProxy;
 import com.wego.web.pxy.PageProxy;
 import com.wego.web.pxy.Proxy;
@@ -23,14 +24,10 @@ public class TxService {
 	@Autowired UserMapper userMapper;
 	@Autowired CrawlingProxy crawler;
 	@Autowired UserProxy manager;
-	//@Autowired List<String> txServicelist;
+	@Autowired Box<String> box;
 	
-	@SuppressWarnings("unchecked")
-	public List<?> crawling(Map<?,?> paramMap){
-		List<String> txServicelist = new ArrayList<>();
-		txServicelist.clear();
-		txServicelist = (List<String>) crawler.crawl(paramMap);
-		return txServicelist;
+	public Box<String> crawling(Map<?,?> paramMap){
+		return crawler.choose(paramMap);
 	}
 	@Transactional
 	public int registerUsers(){

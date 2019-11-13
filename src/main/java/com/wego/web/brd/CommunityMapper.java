@@ -9,7 +9,7 @@ import com.wego.web.pxy.PageProxy;
 import com.wego.web.usr.User;
 
 @Repository
-public interface ArticleMapper {
+public interface CommunityMapper {
 	public void insertArticle(Community param);
 	public String countArticle();
 	public List<Community> selectAll(PageProxy pxy);

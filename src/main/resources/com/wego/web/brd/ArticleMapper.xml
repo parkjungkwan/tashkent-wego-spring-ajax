@@ -19,5 +19,8 @@
 			ORDER BY ARTSEQ DESC) A
 		LIMIT ${startRow}, ${pageSize}
    </select>
-   
+   <select id="createCommunity" parameterType="hashmap">
+		${CREATE_COMMUNITY}
+	</select>
+ 
 </mapper>

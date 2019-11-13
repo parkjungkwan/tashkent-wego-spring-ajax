@@ -11,6 +11,10 @@ public class Proxy {
 		Function<String, Integer> f = Integer :: parseInt;
 		return f.apply(param);
 	}
+	public String string(Object param) {
+		Function<Object, String> f = String :: valueOf;
+		return f.apply(param);
+	}
 	public boolean equals(String p1, String p2) {
 		BiPredicate<String, String> b = String :: equals;
 		return b.test(p1, p2);

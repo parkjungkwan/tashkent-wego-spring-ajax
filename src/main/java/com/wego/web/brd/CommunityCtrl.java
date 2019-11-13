@@ -27,9 +27,9 @@ import com.wego.web.pxy.Box;
 import com.wego.web.utl.Printer;
 
 @RestController
-@RequestMapping("/articles")
-public class ArticleCtrl {
-	private static final Logger logger = LoggerFactory.getLogger(ArticleCtrl.class);
+@RequestMapping("/community")
+public class CommunityCtrl {
+	private static final Logger logger = LoggerFactory.getLogger(CommunityCtrl.class);
 	@Autowired Community article;
 	@Autowired Printer printer;
 	@Autowired CommunityMapper articleMapper;

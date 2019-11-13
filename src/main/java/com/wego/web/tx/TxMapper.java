@@ -1,4 +1,4 @@
-package com.wego.web.aop;
+package com.wego.web.tx;
 
 import org.apache.ibatis.annotations.Insert;
 import org.springframework.stereotype.Repository;
