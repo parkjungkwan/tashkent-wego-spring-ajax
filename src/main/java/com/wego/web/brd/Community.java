@@ -11,6 +11,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Community {
-	private String artseq, image, uid, comments, msg,
+	private String artseq, img, uid, comments, msg,
 				rating, boardtype, title, content ;
 }

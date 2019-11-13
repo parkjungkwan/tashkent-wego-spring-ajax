@@ -11,14 +11,17 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.wego.web.brd.Community;
 import com.wego.web.brd.CommunityMapper;
+import com.wego.web.tx.TxMapper;
 
 @Component("kjchoi")
 public class CommunityProxy {
 	@Autowired CommunityMapper communityMapper;
+	@Autowired TxMapper txMapper;
 	@Autowired Community community;
 	@Autowired CrawlingProxy kjchoi;
 	@Autowired Trunk<String> trunk;
 	@Autowired Box<String> box;
+	
 
 	public String writerUID() {
 		List<String> uids = Arrays.asList("01ikor", "056tac", "06jdh7", "0dlrem", "0qs5fw", "0trane", "0v4w3a",
@@ -39,11 +42,11 @@ public class CommunityProxy {
 		return fcontent.get(0) + comments.get(0);
 	}
 
-	public String content() {
+	public ArrayList<String> content() {
 		trunk.put(Arrays.asList("site","srch"), Arrays.asList("직접입력","스톤애견풀빌라"));
-		ArrayList<String> t = kjchoi.choose(trunk.get()).get();
-		Collections.shuffle(t);
-		return t.get(0);
+		
+		
+		return kjchoi.choose(trunk.get()).get();
 	}
 
 	public String title() {
@@ -82,17 +85,15 @@ public class CommunityProxy {
 		return null;
 	}
 
-	public Community makeCommu() {
-		return new Community(artseq(), makeImge(), writerUID(), comment(), msg(), 
-				rating(), boardtype(), content(), title());
-				
-	}
+
 
 	@Transactional
 	public void insertCommunity() {
-
-		for (int i = 1; i <= 5; i++) {
-			communityMapper.insertArticle(makeCommu());
+		ArrayList<String> t = content();
+		for (int i = 1; i <= 50; i++) {
+			Collections.shuffle(t);
+			txMapper.insertArticles(new Community(artseq(), makeImge(), writerUID(), comment(), msg(), 
+					rating(), boardtype(), t.get(0), title()));
 
 		}
 	}

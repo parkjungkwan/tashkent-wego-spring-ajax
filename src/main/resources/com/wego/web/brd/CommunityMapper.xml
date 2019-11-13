@@ -4,11 +4,7 @@
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.wego.web.brd.CommunityMapper">
   
-   <insert id="insertCommunities" parameterType="Community">
-       INSERT INTO COMMUNITY(UID, BOARDTYPE, TITLE, CONTENT) VALUES (
-            #{uid}, #{boardtype},#{title}, #{content}
-       )
-   </insert>
+  
    <select id="countCommunities" resultType="string">
    		SELECT COUNT(*) FROM COMMUNITY
    </select>
@@ -17,7 +13,8 @@
 		${CREATE_COMMUNITY}
 	</select>
 	 <select id="dropCommunity" parameterType="hashmap">
-		${CREATE_COMMUNITY}
+		${DROP_COMMUNITY}
 	</select>
+	
  
 </mapper>
