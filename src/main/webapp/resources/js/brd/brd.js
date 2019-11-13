@@ -128,6 +128,15 @@ brd = (()=>{
 		})
 		$('<input>',{
 			style: "float:right;width:100px;margin-right:10px",
+			value: "파일업로드"
+		})
+		.addClass("btn btn-warning")
+		.appendTo('#write_form')
+		.click(()=>{
+			alert('파일 업로드')
+		})
+		$('<input>',{
+			style: "float:right;width:100px;margin-right:10px",
 			value: "전송"
 		})
 		.addClass("btn btn-primary")
@@ -152,6 +161,12 @@ brd = (()=>{
 				error : e=>{alert('에러')}
 			})
 		})
+		$('<input>',{
+			type: "file",
+			id: "upload"
+		})
+		.appendTo('#write_form')
+		
 		
 	}
 	let detail = x => {

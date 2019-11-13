@@ -72,6 +72,11 @@ public class ArticleCtrl {
 		return trunk.get();
 	}
 	
+	@GetMapping("/fileupload")
+	public void fileupload() {
+		
+	}
+	
 	
 
 }
