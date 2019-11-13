@@ -5,22 +5,19 @@
 <mapper namespace="com.wego.web.brd.ArticleMapper">
   
    <insert id="insertArticle" parameterType="Article">
-       INSERT INTO ARTICLE(UID, BOARD_TYPE, TITLE, CONTENT) VALUES (
-            #{uid}, #{boardType},#{title}, #{content}
+       INSERT INTO ARTICLE(UID, BOARDTYPE, TITLE, CONTENT) VALUES (
+            #{uid}, #{boardtype},#{title}, #{content}
        )
    </insert>
-   <select id="countArticle" resultType="string">
+   <select id="countArticles" resultType="string">
    		SELECT COUNT(*) FROM ARTICLE
    </select>
    <select id="selectAll" resultType="Article" parameterType="Proxy">
-		SELECT A.BOARD_TYPE AS boardType, A.* FROM (
+		SELECT A.BOARDTYPE AS boardtype, A.* FROM (
 			SELECT * 
 			FROM ARTICLE
 			ORDER BY ARTSEQ DESC) A
 		LIMIT ${startRow}, ${pageSize}
    </select>
-   <select id="createCommunity" parameterType="hashmap">
-		${CREATE_COMMUNITY}
-	</select>
- 
+
 </mapper>

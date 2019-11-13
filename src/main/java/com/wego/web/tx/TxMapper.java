@@ -4,6 +4,7 @@ import org.apache.ibatis.annotations.Insert;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.wego.web.brd.Article;
 import com.wego.web.brd.Community;
 import com.wego.web.usr.User;
 
@@ -16,7 +17,13 @@ public interface TxMapper {
 	@Insert("insert into community ( rating,img,uid, comments, msg, boardtype, title, content) values(\n" + 
 			"        #{rating},#{img},#{uid},#{comments},#{msg},#{boardtype},#{title},#{content}\n" + 
 			"    )")
-	public void insertArticles(Community c);
+	public void insertCommunity(Community c);
+	
+	
+	@Insert("insert into article ( rating,img,uid, comments, msg, boardtype, title, content) values(\n" + 
+			"        #{rating},#{img},#{uid},#{comments},#{msg},#{boardtype},#{title},#{content}\n" + 
+			"    )")
+	public void insertArticles(Article a);
 	
 
 }

@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.wego.web.brd.ArticleMapper;
 import com.wego.web.brd.CommunityMapper;
+import com.wego.web.pxy.ArticleProxy;
 import com.wego.web.pxy.Box;
 import com.wego.web.pxy.CommunityProxy;
 import com.wego.web.pxy.CrawlingProxy;
@@ -27,7 +29,9 @@ public class TxService {
 	@Autowired CrawlingProxy crawler;
 	@Autowired UserProxy manager;
 	@Autowired CommunityProxy kjchoi;
+	@Autowired ArticleProxy eunbi;
 	@Autowired CommunityMapper commnunityMapper;
+	@Autowired ArticleMapper articleMapper;
 	@Autowired Box<String> box;
 	
 	public Box<String> crawling(Map<?,?> paramMap){
@@ -45,6 +49,10 @@ public class TxService {
 	public int writeCommunities() {
 		kjchoi.insertCommunity();
 		return commnunityMapper.countCommuities();
+	}
+	public String writeArticles() {
+		eunbi.insertArticles();
+		return articleMapper.countArticles();
 	}
 	
 }

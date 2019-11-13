@@ -16,6 +16,7 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.wego.web.brd.ArticleMapper;
 import com.wego.web.brd.CommunityMapper;
 import com.wego.web.cmm.ISupplier;
 import com.wego.web.usr.User;
@@ -33,11 +34,11 @@ public class PageProxy extends Proxy{
 	private String search;
 	private final int BLOCK_SIZE = 5;
 	@Autowired Printer p;
-	@Autowired CommunityMapper articleMapper;
+	@Autowired ArticleMapper articleMapper;
 
 	
 	public void paging() {
-		ISupplier<String> s = ()-> articleMapper.countArticle();
+		ISupplier<String> s = ()-> articleMapper.countArticles();
 		totalCount = Integer.parseInt(s.get());
 		System.out.println("프록시 안에서 찍은 전체글 갯수: "+totalCount);
 		pageCount = (totalCount % pageSize != 0) ? (totalCount / pageSize)+1 : totalCount / pageSize;

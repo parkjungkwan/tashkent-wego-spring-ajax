@@ -10,8 +10,8 @@ import com.wego.web.usr.User;
 
 @Repository
 public interface ArticleMapper {
-	public void insertArticle(Community param);
-	public String countArticle();
-	public List<Community> selectAll(PageProxy pxy);
-	public void createCommunity(HashMap<String, String> o);
+	public void insertArticle(Article o);
+	public String countArticles();
+	public List<Article> selectAll(PageProxy o);
+	public void createArticle(HashMap<String, String> o);
 }

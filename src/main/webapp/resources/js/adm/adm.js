@@ -38,7 +38,7 @@ adm = (()=>{
 			{txt: '웹크롤링', name: 'web_crawl'},
 			{txt: '고객관리', name: 'cust_mgmt'},
 			{txt: '커뮤니티관리', name: 'comm_mgmt'},
-			{txt: '상품조회', name: 'item_srch'},
+			{txt: '아티클관리', name: 'article_mgmt'},
 			{txt: '상품수정', name: 'item_mod'},
 			{txt: '상품삭제', name: 'item_del'}],
 			(i,j)=>{
@@ -58,8 +58,8 @@ adm = (()=>{
 					case 'comm_mgmt':
 						comm_mgmt()				
 						break;
-					case 'item_srch':
-						
+					case 'article_mgmt':
+						article_mgmt()
 						break;
 					case 'item_mod':
 						
@@ -130,6 +130,33 @@ adm = (()=>{
 			e.preventDefault()
 			$.getJSON(_+'/tx/write/communities',d=>{
 				alert('커뮤니티 글 수 :'+d.userCount)
+			})
+		})
+	}
+	let article_mgmt=()=>{
+		$('#right').empty()
+		$('<a>아티클 테이블 생성</a><br/>')
+		.appendTo('#right')
+		.click(e=>{
+			e.preventDefault()
+			$.getJSON(_+'/article/create/table',d=>{
+				alert('아티클 테이블 생성 성공여부 :'+d.msg)
+			})
+		})
+		$('<a>아티클 테이블 삭제</a><br/>')
+		.appendTo('#right')
+		.click(e=>{
+			e.preventDefault()
+			$.getJSON(_+'/article/drop/table',d=>{
+				alert('아티클 테이블 삭제 성공여부 :'+d.msg)
+			})
+		})
+		$('<a>아티클 대량정보 입력</a><br/>')
+		.appendTo('#right')
+		.click(e=>{
+			e.preventDefault()
+			$.getJSON(_+'/tx/write/articles',d=>{
+				alert('아티클 글 수 :'+d.userCount)
 			})
 		})
 	}

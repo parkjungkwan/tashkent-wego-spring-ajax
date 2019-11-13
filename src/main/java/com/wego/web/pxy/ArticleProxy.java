@@ -9,16 +9,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.wego.web.brd.Article;
+import com.wego.web.brd.ArticleMapper;
 import com.wego.web.brd.Community;
 import com.wego.web.brd.CommunityMapper;
 import com.wego.web.tx.TxMapper;
 
-@Component("kjchoi")
-public class CommunityProxy {
-	@Autowired CommunityMapper communityMapper;
+@Component("eunbi")
+public class ArticleProxy {
+	@Autowired ArticleMapper articleMapper;
 	@Autowired TxMapper txMapper;
-	@Autowired Community community;
-	@Autowired CrawlingProxy kjchoi;
+	@Autowired Article article;
+	@Autowired CrawlingProxy crawler;
 	@Autowired Trunk<String> trunk;
 	@Autowired Box<String> box;
 	
@@ -46,7 +48,7 @@ public class CommunityProxy {
 		trunk.put(Arrays.asList("site","srch"), Arrays.asList("직접입력","스톤애견풀빌라"));
 		
 		
-		return kjchoi.choose(trunk.get()).get();
+		return crawler.choose(trunk.get()).get();
 	}
 
 	public String title() {
@@ -88,11 +90,11 @@ public class CommunityProxy {
 
 
 	@Transactional
-	public void insertCommunity() {
+	public void insertArticles() {
 		ArrayList<String> t = content();
 		for (int i = 1; i <= 50; i++) {
 			Collections.shuffle(t);
-			txMapper.insertCommunity(new Community(artseq(), makeImge(), writerUID(), comment(), msg(), 
+			txMapper.insertArticles(new Article(artseq(), makeImge(), writerUID(), comment(), msg(), 
 					rating(), boardtype(), t.get(0), title()));
 
 		}

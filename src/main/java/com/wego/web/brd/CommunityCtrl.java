@@ -41,9 +41,9 @@ public class CommunityCtrl {
 	@PostMapping("/")
 	public Map<?,?> write(@RequestBody Community param){
 		param.setBoardtype("리뷰");
-		IConsumer<Community> c = t-> articleMapper.insertArticle(param);
+		IConsumer<Community> c = t-> communityMapper.insertCommunity(param);
 		c.accept(param);
-		ISupplier<String> s =()-> articleMapper.countArticle();
+		ISupplier<String> s =()-> communityMapper.countCommunities()+"";
 		trunk.put(Arrays.asList("msg", "count"),
 				Arrays.asList("SUCCESS",s.get()));
 		return trunk.get();
@@ -56,7 +56,7 @@ public class CommunityCtrl {
 		pager.setPageSize(pager.integer(pageSize));
 		pager.paging();
 		box.clear();
-		ISupplier<List<Community>> s =()-> articleMapper.selectAll(pager);
+		ISupplier<List<Community>> s =()-> communityMapper.selectAll(pager);
 		printer.accept("해당 페이지 글목록 \n"+s.get());
 		int ran = pager.random(3, 11);
 		System.out.println("랜덤 수 출력 : "+ ran);
@@ -67,7 +67,7 @@ public class CommunityCtrl {
 	
 	@GetMapping("/count")
 	public Map<?,?> count(){
-		ISupplier<String> s =()-> articleMapper.countArticle();
+		ISupplier<String> s =()-> communityMapper.countCommunities()+"";
 		printer.accept("카운팅 : "+s.get());
 		trunk.put(Arrays.asList("count"),Arrays.asList(s.get()));
 		return trunk.get();

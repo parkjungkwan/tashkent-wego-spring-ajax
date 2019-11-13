@@ -32,17 +32,17 @@ public class ArticleCtrl {
 	private static final Logger logger = LoggerFactory.getLogger(ArticleCtrl.class);
 	@Autowired Community article;
 	@Autowired Printer printer;
-	@Autowired CommunityMapper articleMapper;
+	@Autowired ArticleMapper articleMapper;
 	@Autowired Box<Community>box;
-	@Qualifier PageProxy pager;
-	@Qualifier Trunk<Object> trunk;
+	@Autowired PageProxy pager;
+	@Autowired Trunk<Object> trunk;
 	
 	@PostMapping("/")
-	public Map<?,?> write(@RequestBody Community param){
+	public Map<?,?> write(@RequestBody Article param){
 		//param.setBoardType("게시판");
-		IConsumer<Community> c = t-> articleMapper.insertArticle(param);
+		IConsumer<Article> c = t-> articleMapper.insertArticle(param);
 		c.accept(param);
-		ISupplier<String> s =()-> articleMapper.countArticle();
+		ISupplier<String> s =()-> articleMapper.countArticles()+"";
 		trunk.put(Arrays.asList("msg", "count"),
 				Arrays.asList("SUCCESS",s.get()));
 		return trunk.get();
@@ -55,7 +55,7 @@ public class ArticleCtrl {
 		pager.setPageSize(pager.integer(pageSize));
 		pager.paging();
 		box.clear();
-		ISupplier<List<Community>> s =()-> articleMapper.selectAll(pager);
+		ISupplier<List<Article>> s =()-> articleMapper.selectAll(pager);
 		printer.accept("해당 페이지 글목록 \n"+s.get());
 		int ran = pager.random(3, 11);
 		System.out.println("랜덤 수 출력 : "+ ran);
@@ -66,39 +66,12 @@ public class ArticleCtrl {
 	
 	@GetMapping("/count")
 	public Map<?,?> count(){
-		ISupplier<String> s =()-> articleMapper.countArticle();
+		ISupplier<String> s =()-> articleMapper.countArticles()+"";
 		printer.accept("카운팅 : "+s.get());
 		trunk.put(Arrays.asList("count"),Arrays.asList(s.get()));
 		return trunk.get();
 	}
 	
-	@GetMapping("/{artseq}")
-	public Community read(@PathVariable String artseq, @RequestBody  Community param) {
-		return null;
-	}
-	@PutMapping("/{artseq}")
-	public Community update(@PathVariable String artseq, @RequestBody Community param) {
-		return null;
-	}
-	@DeleteMapping("/{artseq}")
-	public Map<?,?> delete(@PathVariable String artseq, @RequestBody Community param){
-		return null;
-	}
 	
-	@GetMapping("/fileupload")
-	public void fileUpload() {
-		
-	}
-	@GetMapping("/create/table")
-	public Map<?,?> createUser(){
-		HashMap<String, String> paramMap = new HashMap<>();
-		paramMap.put("CREATE_COMMUNITY", SQL.CREATE_COMMUNITY.toString());
-		printer.accept("테이블 생성 쿼리 : \n"+paramMap.get("CREATE_COMMUNITY"));
-		IConsumer<HashMap<String, String>> c = o->articleMapper.createCommunity(o);
-		c.accept(paramMap);
-		paramMap.clear();
-		paramMap.put("msg", "SUCCESS");
-		return paramMap;
-	}
 
 }

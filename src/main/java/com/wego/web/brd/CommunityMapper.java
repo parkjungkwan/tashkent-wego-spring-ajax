@@ -10,10 +10,11 @@ import com.wego.web.usr.User;
 
 @Repository
 public interface CommunityMapper {
-	public void insertArticle(Community param);
-	public String countArticle();
+	public void insertCommunity(Community param);
+	public String countCommunities();
 	public List<Community> selectAll(PageProxy pxy);
 	public void createCommunity(HashMap<String, String> o);
 	public void dropCommunity(HashMap<String, String> o);
 	public int countCommuities();
+	
 }

@@ -52,6 +52,14 @@ public class TxController {
 		trunk.put(Arrays.asList("userCount"), Arrays.asList(crawler.string(userCount)));
 		return trunk.get();
 	}
+	@GetMapping("/write/articles")
+	public Map<?,?> writeArticles() {
+		
+		String userCount = txService.writeArticles();
+		printer.accept("서비스 카운팅: "+ userCount);
+		trunk.put(Arrays.asList("userCount"), Arrays.asList(userCount));
+		return trunk.get();
+	}
 	@GetMapping("/truncate/users")
 	public Map<?,?> truncateUsers() {
 		
