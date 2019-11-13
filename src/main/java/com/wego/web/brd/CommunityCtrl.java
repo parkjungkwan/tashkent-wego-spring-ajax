@@ -32,14 +32,15 @@ public class CommunityCtrl {
 	private static final Logger logger = LoggerFactory.getLogger(CommunityCtrl.class);
 	@Autowired Community article;
 	@Autowired Printer printer;
-	@Autowired CommunityMapper articleMapper;
+	@Autowired ArticleMapper articleMapper;
+	@Autowired CommunityMapper communityMapper;
 	@Autowired Box<Community>box;
 	@Qualifier PageProxy pager;
 	@Qualifier Trunk<Object> trunk;
 	
 	@PostMapping("/")
 	public Map<?,?> write(@RequestBody Community param){
-		param.setBoardType("게시판");
+		param.setBoardtype("리뷰");
 		IConsumer<Community> c = t-> articleMapper.insertArticle(param);
 		c.accept(param);
 		ISupplier<String> s =()-> articleMapper.countArticle();
@@ -94,7 +95,18 @@ public class CommunityCtrl {
 		HashMap<String, String> paramMap = new HashMap<>();
 		paramMap.put("CREATE_COMMUNITY", SQL.CREATE_COMMUNITY.toString());
 		printer.accept("테이블 생성 쿼리 : \n"+paramMap.get("CREATE_COMMUNITY"));
-		IConsumer<HashMap<String, String>> c = o->articleMapper.createCommunity(o);
+		IConsumer<HashMap<String, String>> c = o->communityMapper.createCommunity(o);
+		c.accept(paramMap);
+		paramMap.clear();
+		paramMap.put("msg", "SUCCESS");
+		return paramMap;
+	}
+	@GetMapping("/drop/table")
+	public Map<?,?> dropCommunity(){
+		HashMap<String, String> paramMap = new HashMap<>();
+		paramMap.put("DROP_COMMUNITY", SQL.DROP_COMMUNITY.toString());
+		printer.accept("테이블 삭제 쿼리 : \n"+paramMap.get("DROP_COMMUNITY"));
+		IConsumer<HashMap<String, String>> c = o->communityMapper.dropCommunity(o);
 		c.accept(paramMap);
 		paramMap.clear();
 		paramMap.put("msg", "SUCCESS");

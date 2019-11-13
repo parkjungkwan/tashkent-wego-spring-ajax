@@ -26,6 +26,7 @@ public class TxController {
 	@Autowired TxService txService;
 	@Autowired Trunk<String> trunk;
 	@Autowired CrawlingProxy crawler;
+	@Autowired Box<String> box;
 	
 	@GetMapping("/crawling/{site}/{srch}")
 	public void bringUrl(@PathVariable String site,
@@ -33,12 +34,20 @@ public class TxController {
 		printer.accept(site +", srch "+srch);
 		trunk.put(Arrays.asList("site","srch"),
 				Arrays.asList(site, srch) );
-		txService.crawling(trunk.get());
+		box = txService.crawling(trunk.get());
 	}
 	@GetMapping("/register/users")
 	public Map<?,?> registerUsers() {
 		
 		int userCount = txService.registerUsers();
+		printer.accept("서비스 카운팅: "+ userCount);
+		trunk.put(Arrays.asList("userCount"), Arrays.asList(crawler.string(userCount)));
+		return trunk.get();
+	}
+	@GetMapping("/write/communities")
+	public Map<?,?> writeCommunities() {
+		
+		int userCount = txService.writeCommunities();
 		printer.accept("서비스 카운팅: "+ userCount);
 		trunk.put(Arrays.asList("userCount"), Arrays.asList(crawler.string(userCount)));
 		return trunk.get();

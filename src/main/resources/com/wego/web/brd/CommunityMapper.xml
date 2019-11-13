@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wego.web.brd.CommunityMapper">
+  
+   <insert id="insertCommunities" parameterType="Community">
+       INSERT INTO COMMUNITY(UID, BOARDTYPE, TITLE, CONTENT) VALUES (
+            #{uid}, #{boardtype},#{title}, #{content}
+       )
+   </insert>
+   <select id="countCommunities" resultType="string">
+   		SELECT COUNT(*) FROM COMMUNITY
+   </select>
+  
+   <select id="createCommunity" parameterType="hashmap">
+		${CREATE_COMMUNITY}
+	</select>
+	 <select id="dropCommunity" parameterType="hashmap">
+		${CREATE_COMMUNITY}
+	</select>
+ 
+</mapper>

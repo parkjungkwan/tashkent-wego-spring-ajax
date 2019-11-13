@@ -1,7 +1,7 @@
 package com.wego.web.enums;
 
 public enum SQL {
-	CREATE_DB, CREATE_USER, DROP_USER, CREATE_ITEM, TRUNCATE_USER, CREATE_COMMUNITY;
+	CREATE_DB, CREATE_USER, DROP_USER, CREATE_ITEM, TRUNCATE_USER, CREATE_COMMUNITY, DROP_COMMUNITY;
 	@Override
 	public String toString() {
 		String result = "";
@@ -31,7 +31,7 @@ public enum SQL {
 			break;
 		case CREATE_COMMUNITY :
            result = "CREATE TABLE COMMUNITY("
-                  + "ARTSEQ VARCHAR(30) PRIMARY KEY,"
+                  + "ARTSEQ VARCHAR(30)INT AUTO_INCREMENT PRIMARY KEY,"
                   + "IMG VARCHAR(30)  REFERENCES IMG,"
                   + "UID VARCHAR(30)  REFERENCES USER,"
                   + "COMMENTS VARCHAR(30),"
@@ -40,6 +40,9 @@ public enum SQL {
                   + "BOARDTYPE VARCHAR(30),"
                   + "TITLE VARCHAR(30),"
                   + "CONTENT VARCHAR(30))";
+			break;
+		case DROP_COMMUNITY:
+			result = "DROP TABLE COMMUNITY";
 			break;
 		}
 		

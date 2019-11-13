@@ -14,4 +14,6 @@ public interface CommunityMapper {
 	public String countArticle();
 	public List<Community> selectAll(PageProxy pxy);
 	public void createCommunity(HashMap<String, String> o);
+	public void dropCommunity(HashMap<String, String> o);
+	public int countCommuities();
 }

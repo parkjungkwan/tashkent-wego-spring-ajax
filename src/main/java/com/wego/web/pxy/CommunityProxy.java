@@ -1,5 +1,6 @@
 package com.wego.web.pxy;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -13,10 +14,11 @@ import com.wego.web.brd.CommunityMapper;
 
 @Component("kjchoi")
 public class CommunityProxy {
-	@Autowired
-	CommunityMapper communityMapper;
-	@Autowired
-	Community community;
+	@Autowired CommunityMapper communityMapper;
+	@Autowired Community community;
+	@Autowired CrawlingProxy kjchoi;
+	@Autowired Trunk<String> trunk;
+	@Autowired Box<String> box;
 
 	public String writerUID() {
 		List<String> uids = Arrays.asList("01ikor", "056tac", "06jdh7", "0dlrem", "0qs5fw", "0trane", "0v4w3a",
@@ -27,24 +29,21 @@ public class CommunityProxy {
 	}
 
 	public String comment() {
-		List<String> fCONTENT = Arrays.asList("첫 방문인데", "세번째 방문인데", "여러번 방문인데", "다시 오고싶은", "훌륭한", "다시한번 오고싶은",
+		List<String> fcontent = Arrays.asList("첫 방문인데", "세번째 방문인데", "여러번 방문인데", "다시 오고싶은", "훌륭한", "다시한번 오고싶은",
 				"두번째 방문인데", "자주왔지만 다음엔");
 		List<String> comments = Arrays.asList("좋아요", "싫어요", "그냥그래요", "별로에요", "대만족", "친절함",
 									"편함", "나쁘지 않아요", "괜찮습니다",
 				"매우만족합니다");
-		Collections.shuffle(fCONTENT);
+		Collections.shuffle(fcontent);
 		Collections.shuffle(comments);
-		String comment = fCONTENT.get(0) + comments.get(0);
-		return comment;
+		return fcontent.get(0) + comments.get(0);
 	}
 
 	public String content() {
-		
-		List<String> CONTENT = Arrays.asList();
-		
-		Collections.shuffle(CONTENT);
-		String fullCONTENT = CONTENT.get(0);
-		return fullCONTENT;
+		trunk.put(Arrays.asList("site","srch"), Arrays.asList("직접입력","스톤애견풀빌라"));
+		ArrayList<String> t = kjchoi.choose(trunk.get()).get();
+		Collections.shuffle(t);
+		return t.get(0);
 	}
 
 	public String title() {
@@ -84,8 +83,9 @@ public class CommunityProxy {
 	}
 
 	public Community makeCommu() {
-		return new Community(artseq(), makeImge(), writerUID(), comment(), msg(), rating(), boardtype(), content(),
-				title());
+		return new Community(artseq(), makeImge(), writerUID(), comment(), msg(), 
+				rating(), boardtype(), content(), title());
+				
 	}
 
 	@Transactional

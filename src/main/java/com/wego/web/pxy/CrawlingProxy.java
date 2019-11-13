@@ -1,9 +1,13 @@
 package com.wego.web.pxy;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -16,10 +20,9 @@ public class CrawlingProxy extends Proxy{
 	public Box<String> choose(Map<?, ?> paramMap) {
 		printer.accept("키값 : "+paramMap.get("site"));
 		printer.accept("값 : "+paramMap.get("srch"));
-		String url = "";
 		switch(string(paramMap.get("srch"))) {
 		case "스톤애견풀빌라":
-			crawling(Path.CRAWLING_TARGET.toString());
+			box = crawling(Path.CRAWLING_TARGET.toString()+"1");
 			break;
 			
 		default : 
@@ -28,22 +31,24 @@ public class CrawlingProxy extends Proxy{
 		}
 		return box;
 	}
-	private void crawling(String url) {
+	private Box<String> crawling(String url) {
 		printer.accept("넘어온 URL \n" + url);
 		box.clear();
 		
 		try {
-			Connection.Response response = Jsoup.connect(url).method(Connection.Method.GET).execute();
-			Document document = response.parse();
-			String text = document.html();
-			// String text = document.text();
-			printer.accept("===============================");
-			printer.accept("크롤링한 텍스트 \n" + text);
-			box.add(text);
-
+			// "https://music.bugs.co.kr/recomreview?&order=listorder&page=2"
+			Document rawData = Jsoup.connect(url).timeout(10*1000).get();
+			  Elements artist = rawData.select("div[class=review_txt]"); 
+			  
+			  for(Element e : artist) {
+				  box.add(e.text()+"\n ***************** \n");
+			  }
+			 
 		} catch (Exception e2) {
+			// TODO Auto-generated catch block
 			e2.printStackTrace();
 		}
+		return box;
 		
 	}
 }

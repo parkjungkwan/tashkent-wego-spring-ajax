@@ -10,7 +10,7 @@ public enum Path {
 			result = "C:\\Users\\user\\Downloads\\TEXAS_SPRING5_WEGO-develop_srch\\TEXAS_SPRING5_WEGO-develop_srch\\src\\main\\webapp\\resources\\upload\\temp";
 			break;
 		case CRAWLING_TARGET:
-			result = "https://store.naver.com/accommodations/detail?entry=plt&id=1285629759&tab=bookingReview&tabPage=1";
+			result = "https://store.naver.com/accommodations/detail?entry=plt&id=1285629759&tab=bookingReview&tabPage=";
 		}
 		
 		return result;

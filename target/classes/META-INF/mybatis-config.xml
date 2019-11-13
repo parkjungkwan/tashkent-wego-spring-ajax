@@ -7,6 +7,7 @@
   	<typeAliases>
       	<typeAlias alias="User" type="com.wego.web.usr.User"/>
       	<typeAlias alias="Article" type="com.wego.web.brd.Article"/>
+      	<typeAlias alias="Community" type="com.wego.web.brd.Community"/>
       	<typeAlias alias="Admin" type="com.wego.web.adm.Admin"/>
       	<typeAlias alias="Proxy" type="com.wego.web.pxy.Proxy"/>
 	</typeAliases>

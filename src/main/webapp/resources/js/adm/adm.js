@@ -112,8 +112,24 @@ adm = (()=>{
 		.appendTo('#right')
 		.click(e=>{
 			e.preventDefault()
-			$.getJSON(_+'/articles/create/table',d=>{
+			$.getJSON(_+'/community/create/table',d=>{
 				alert('테이블 생성 성공여부 :'+d.msg)
+			})
+		})
+		$('<a>커뮤니티 테이블 삭제</a><br/>')
+		.appendTo('#right')
+		.click(e=>{
+			e.preventDefault()
+			$.getJSON(_+'/community/drop/table',d=>{
+				alert('테이블 삭제 성공여부 :'+d.msg)
+			})
+		})
+		$('<a>커뮤니티 대량정보 입력</a><br/>')
+		.appendTo('#right')
+		.click(e=>{
+			e.preventDefault()
+			$.getJSON(_+'/tx/write/communities',d=>{
+				alert('커뮤니티 글 수 :'+d.userCount)
 			})
 		})
 	}

@@ -39,7 +39,7 @@ public class ArticleCtrl {
 	
 	@PostMapping("/")
 	public Map<?,?> write(@RequestBody Community param){
-		param.setBoardType("게시판");
+		//param.setBoardType("게시판");
 		IConsumer<Community> c = t-> articleMapper.insertArticle(param);
 		c.accept(param);
 		ISupplier<String> s =()-> articleMapper.countArticle();
