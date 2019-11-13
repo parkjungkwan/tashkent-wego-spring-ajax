@@ -30,16 +30,16 @@ public enum SQL {
 			result = "CREATE TABLE ITEM()";
 			break;
 		case CREATE_COMMUNITY :
-           result = "CREATE TABLE COMMUNITY("
-                  + "ARTSEQ VARCHAR(30)INT AUTO_INCREMENT PRIMARY KEY,"
-                  + "IMG VARCHAR(30)  REFERENCES IMG,"
-                  + "UID VARCHAR(30)  REFERENCES USER,"
-                  + "COMMENTS VARCHAR(30),"
-                  + "MSG VARCHAR(30),"
-                  + "RATING VARCHAR(30), "
-                  + "BOARDTYPE VARCHAR(30),"
-                  + "TITLE VARCHAR(30),"
-                  + "CONTENT VARCHAR(30))";
+           result =  "CREATE TABLE COMMUNITY("
+                   + "ARTSEQ INT AUTO_INCREMENT PRIMARY KEY,"
+                   + "IMG VARCHAR(30)  REFERENCES IMG,"
+                   + "UID VARCHAR(30)  REFERENCES USER,"
+                   + "COMMENTS VARCHAR(100),"
+                   + "MSG VARCHAR(50),"
+                   + "RATING VARCHAR(50), "
+                   + "BOARDTYPE VARCHAR(50),"
+                   + "TITLE VARCHAR(300),"
+                   + "CONTENT VARCHAR(500))";
 			break;
 		case DROP_COMMUNITY:
 			result = "DROP TABLE COMMUNITY";
