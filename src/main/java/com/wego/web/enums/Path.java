@@ -7,7 +7,7 @@ public enum Path {
 		String result = "";
 		switch(this) {
 		case UPLOAD_PATH:
-			result = "C:\\Users\\user\\Downloads\\TEXAS_SPRING5_WEGO-develop_srch\\TEXAS_SPRING5_WEGO-develop_srch\\src\\main\\webapp\\resources\\upload\\temp";
+			result = "C:\\Users\\user\\Downloads\\TEXAS_SPRING5_WEGO-develop_srch\\TEXAS_SPRING5_WEGO-develop_srch\\src\\main\\webapp\\resources\\upload\\";
 			break;
 		case CRAWLING_TARGET:
 			result = "https://store.naver.com/accommodations/detail?entry=plt&id=1285629759&tab=bookingReview&tabPage=";

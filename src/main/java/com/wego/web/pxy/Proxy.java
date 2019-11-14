@@ -1,5 +1,8 @@
 package com.wego.web.pxy;
 
+import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.function.BiFunction;
 import java.util.function.BiPredicate;
 import java.util.function.Function;
@@ -27,6 +30,20 @@ public class Proxy {
 	public int[] array(int size) {
 		Function<Integer, int[]> f = int[] :: new;
 		return f.apply(size);
+	}
+	public String currentDate() {
+		return new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+	}
+	public String currentTime() {
+		return new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(new Date());
+	}
+	public File makeDir(String t, String u) {
+		BiFunction<String,String, File> f = File::new;
+		return f.apply(t, u);
+	}
+	public File makeFile(File t, String u) {
+		BiFunction<File,String, File> f = File::new;
+		return f.apply(t, u);
 	}
 	
 	
