@@ -29,6 +29,7 @@ import com.wego.web.enums.SQL;
 import com.wego.web.pxy.PageProxy;
 import com.wego.web.pxy.Trunk;
 import com.wego.web.pxy.Box;
+import com.wego.web.pxy.FileProxy;
 import com.wego.web.utl.Printer;
 
 @RestController
@@ -41,6 +42,7 @@ public class ArticleCtrl {
 	@Autowired Box<Community>box;
 	@Autowired PageProxy pager;
 	@Autowired Trunk<Object> trunk;
+	@Autowired FileProxy filemgr;
 	
 	@PostMapping("/")
 	public Map<?,?> write(@RequestBody Article param){
@@ -79,20 +81,9 @@ public class ArticleCtrl {
 	
 	@PostMapping("/fileupload")
 	public void fileupload(MultipartFile[] uploadFile) {
-		System.out.println("파일업로드 들어옴");
-		String uploadFolder = Path.UPLOAD_PATH.toString();
-		for(MultipartFile m : uploadFile) {
-			String fname = m.getOriginalFilename();
-			fname = fname.substring(fname.lastIndexOf("\\")+1);
-			File savedFile = new File(uploadFolder, fname);
-			try {
-				m.transferTo(savedFile);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} 
-		}
+		filemgr.fileupload(uploadFile);
 	}
+	
 	
 	
 
