@@ -8,13 +8,14 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" crossorigin="anonymous"></script>
 <script src="<%=application.getContextPath()%>/resources/js/app.js"></script>
+<script src="<%=application.getContextPath()%>/resources/js/cmm/proxy.js"></script>
 <script src="<%=application.getContextPath()%>/resources/js/cmm/router.js"></script> 
 <script src="<%=application.getContextPath()%>/resources/js/cmm/auth.js"></script> 
 <script src="<%=application.getContextPath()%>/resources/js/vue/auth_vue.js"></script> 
 <script src="<%=application.getContextPath()%>/resources/js/brd/brd.js"></script> 
 <script src="<%=application.getContextPath()%>/resources/js/cmm/navi.js"></script> 
 <script src="<%=application.getContextPath()%>/resources/js/vue/navi_vue.js"></script> 
-<script src="<%=application.getContextPath()%>/resources/js/cmm/proxy.js"></script>
+
 <script src="<%=application.getContextPath()%>/resources/js/vue/page_vue.js"></script> 
 <script>
 	app.run('<%=application.getContextPath()%>'); 

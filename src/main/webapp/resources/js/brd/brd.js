@@ -3,7 +3,7 @@ var brd = brd||{}
 brd = (()=>{
 	const WHEN_ERR = '호출하는 JS 파일을 찾지 못했습니다.'
 	let _, js, css, img, brd_vue_js, page_vue_js,
-		navi_js, navi_vue_js
+		navi_js, navi_vue_js, proxy_js
 	let init =()=>{
 		_ = $.ctx()
 		js = $.js()
@@ -13,6 +13,7 @@ brd = (()=>{
         brd_vue_js = js + '/vue/brd_vue.js'
         navi_vue_js = js + '/vue/navi_vue.js'
         page_vue_js = js + '/vue/page_vue.js'
+        proxy_js = js + '/cmm/proxy.js'
         
 	}
 	let onCreate =()=>{
@@ -21,7 +22,8 @@ brd = (()=>{
 			$.getScript(brd_vue_js),
 			$.getScript(navi_js),
 			$.getScript(navi_vue_js),
-			$.getScript(page_vue_js)
+			$.getScript(page_vue_js),
+			$.getScript(proxy_js)
 		).done(()=>{
 			setContentView()
 			navi.onCreate()
@@ -35,6 +37,7 @@ brd = (()=>{
         .html(brd_vue.brd_body({ctx: '/web',css: $.css(), img: $.img()}))
         $(navi_vue.nav()).appendTo('#navi')
         recent_updates({page: '1', size: '5'})
+        
 	}
 	let recent_updates= x =>{
 		$('#recent_updates .media').remove()
@@ -113,6 +116,7 @@ brd = (()=>{
         })
        
 	}
+
 	let write=()=>{
 		$('#recent_updates').html(brd_vue.brd_write())
 		$('#write_form').attr({
@@ -139,13 +143,17 @@ brd = (()=>{
 		.appendTo('#write_form')
 		.click(e=>{
 			e.preventDefault()
-			alert('### 1 ###')
 			let formData = new FormData()
 			let files = $('#upload')[0].files
 			let i = 0
 			for(; i< files.length; i++){
 				formData.append("uploadFile", files[i])
 			}
+			/*if(new CheckExtension({fname: files[i].name, fsize: files[i].size})){
+				return false
+			}
+			formData.append("uploadFile", files[i])*/
+			
 			$.ajax({
 				url : _+'/articles/fileupload',
 				processData : false,
@@ -159,7 +167,7 @@ brd = (()=>{
 					alert('파일 업로드 실패')
 				}
 			})
-			alert('### 2 ###')
+			
 		})
 		$('<input>',{
 			style: "float:right;width:100px;margin-right:10px",
@@ -222,5 +230,6 @@ brd = (()=>{
 		})
 		
 	}
+	
 	return {onCreate, write}
 })()
