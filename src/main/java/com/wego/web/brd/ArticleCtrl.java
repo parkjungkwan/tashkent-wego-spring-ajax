@@ -1,5 +1,7 @@
 package com.wego.web.brd;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -17,9 +19,12 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.wego.web.cmm.IConsumer;
 import com.wego.web.cmm.ISupplier;
+import com.wego.web.enums.Path;
 import com.wego.web.enums.SQL;
 import com.wego.web.pxy.PageProxy;
 import com.wego.web.pxy.Trunk;
@@ -72,9 +77,21 @@ public class ArticleCtrl {
 		return trunk.get();
 	}
 	
-	@GetMapping("/fileupload")
-	public void fileupload() {
-		
+	@PostMapping("/fileupload")
+	public void fileupload(MultipartFile[] uploadFile) {
+		System.out.println("파일업로드 들어옴");
+		String uploadFolder = Path.UPLOAD_PATH.toString();
+		for(MultipartFile m : uploadFile) {
+			String fname = m.getOriginalFilename();
+			fname = fname.substring(fname.lastIndexOf("\\")+1);
+			File savedFile = new File(uploadFolder, fname);
+			try {
+				m.transferTo(savedFile);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} 
+		}
 	}
 	
 	

@@ -115,6 +115,11 @@ brd = (()=>{
 	}
 	let write=()=>{
 		$('#recent_updates').html(brd_vue.brd_write())
+		$('#write_form').attr({
+			method : 'post',
+			name : 'write_form',
+			enctype : 'multipart/form-data'
+		})
 		$('#write_form input[name="writer"]').val(getCookie("USERID"))
 		$('#suggestions').remove()
 		$('<input>',{
@@ -132,8 +137,29 @@ brd = (()=>{
 		})
 		.addClass("btn btn-warning")
 		.appendTo('#write_form')
-		.click(()=>{
-			alert('파일 업로드')
+		.click(e=>{
+			e.preventDefault()
+			alert('### 1 ###')
+			let formData = new FormData()
+			let files = $('#upload')[0].files
+			let i = 0
+			for(; i< files.length; i++){
+				formData.append("uploadFile", files[i])
+			}
+			$.ajax({
+				url : _+'/articles/fileupload',
+				processData : false,
+				contentType : false,
+				data : formData,
+				type : 'POST',
+				success : d => {
+					alert("파일업로드 성공")
+				},
+				error : e => {
+					alert('파일 업로드 실패')
+				}
+			})
+			alert('### 2 ###')
 		})
 		$('<input>',{
 			style: "float:right;width:100px;margin-right:10px",
